@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public GameObject meleeAttackPrefab;
     public GameObject rangedAttackPrefab;
-    
+
     private Rigidbody2D playerRb;
     private float horizontalMovement;
     private float verticalMovement;
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     void CheckHealth()
     {
-        if(playerHealth < 1)
+        if (playerHealth < 1)
         {
             //GameManager.isGameOver = true
             //Time.timeScale = 0;
@@ -74,11 +74,25 @@ public class PlayerController : MonoBehaviour
     private void MeleeAttack()
     {
         Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y);
-        Instantiate(meleeAttackPrefab, spawnPosition, meleeAttackPrefab.transform.rotation);
+        var melee = Instantiate(meleeAttackPrefab, spawnPosition, meleeAttackPrefab.transform.rotation);
+        Physics2D.IgnoreCollision(melee.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        Weapons meleeScript = melee.GetComponent<Weapons>();
+        meleeScript.SetRotation(MousePosition());
     }
 
     private void RangedAttack()
     {
+        Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y);
+        var ranged = Instantiate(rangedAttackPrefab, spawnPosition, meleeAttackPrefab.transform.rotation);
+        Physics2D.IgnoreCollision(ranged.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        Weapons rangedScript = ranged.GetComponent<Weapons>();
+        rangedScript.SetRotation(MousePosition());
+    }
 
+    Vector2 MousePosition()
+    {
+        Vector2 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        return mousePosition;
     }
 }
