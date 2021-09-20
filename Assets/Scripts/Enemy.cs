@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     public float minDistance;
     public float attackSpeed;
 
+    public bool hasAttacked;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,17 +38,27 @@ public class Enemy : MonoBehaviour
         if (Vector2.Distance(transform.position, playerPos) >= minDistance)
             transform.position = Vector2.MoveTowards(transform.position, playerPos, enemySpeed * Time.deltaTime);
         else
-            StartCoroutine(Attack());
+            Attack();
     }
 
-    public virtual IEnumerator Attack()
+    public virtual void Attack()
     {
-        Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y);
-        var weap = Instantiate(weapon, spawnPosition, weapon.transform.rotation);
-        Physics2D.IgnoreCollision(weap.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        Weapons weaponScript = weap.GetComponent<Weapons>();
-        weaponScript.SetRotation(playerPos);
-        yield return new WaitForSeconds(attackSpeed);
+        if(hasAttacked == false)
+        {
+            Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y);
+            var weap = Instantiate(weapon, spawnPosition, weapon.transform.rotation);
+            Physics2D.IgnoreCollision(weap.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Weapons weaponScript = weap.GetComponent<Weapons>();
+            weaponScript.SetRotation(playerPos);
+            hasAttacked = true;
+            StartCoroutine(AttackCooldown());
+        }
+    }
+
+    public virtual IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSecondsRealtime(attackSpeed);
+        hasAttacked = false;
     }
 
     public void DamageManagement(int damage)

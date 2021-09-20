@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRb;
     private float horizontalMovement;
     private float verticalMovement;
+    public bool hasAttacked;
+    public float attackSpeed;
 
     private int m_playerHealth;
     public int playerHealth
@@ -21,7 +23,7 @@ public class PlayerController : MonoBehaviour
             if (value <= 10)
                 m_playerHealth = value;
             else
-                m_playerHealth = 10;
+                m_playerHealth = 15;
         }
     }
 
@@ -73,20 +75,36 @@ public class PlayerController : MonoBehaviour
 
     private void MeleeAttack()
     {
-        Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y);
-        var melee = Instantiate(meleeAttackPrefab, spawnPosition, meleeAttackPrefab.transform.rotation);
-        Physics2D.IgnoreCollision(melee.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        Weapons meleeScript = melee.GetComponent<Weapons>();
-        meleeScript.SetRotation(MousePosition());
+        if(!hasAttacked)
+        {
+            Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y);
+            var melee = Instantiate(meleeAttackPrefab, spawnPosition, meleeAttackPrefab.transform.rotation);
+            Physics2D.IgnoreCollision(melee.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Weapons meleeScript = melee.GetComponent<Weapons>();
+            meleeScript.SetRotation(MousePosition());
+            hasAttacked = true;
+            StartCoroutine(AttackCooldown());
+        }
     }
 
     private void RangedAttack()
     {
-        Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y);
-        var ranged = Instantiate(rangedAttackPrefab, spawnPosition, meleeAttackPrefab.transform.rotation);
-        Physics2D.IgnoreCollision(ranged.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        Weapons rangedScript = ranged.GetComponent<Weapons>();
-        rangedScript.SetRotation(MousePosition());
+        if(!hasAttacked)
+        {
+            Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y);
+            var ranged = Instantiate(rangedAttackPrefab, spawnPosition, meleeAttackPrefab.transform.rotation);
+            Physics2D.IgnoreCollision(ranged.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Weapons rangedScript = ranged.GetComponent<Weapons>();
+            rangedScript.SetRotation(MousePosition());
+            hasAttacked = true;
+            StartCoroutine(AttackCooldown());
+        }
+    }
+
+    public virtual IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSecondsRealtime(attackSpeed);
+        hasAttacked = false;
     }
 
     Vector2 MousePosition()

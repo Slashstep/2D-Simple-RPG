@@ -8,7 +8,7 @@ public class Enemy_Meele : Enemy
     void Start()
     {
         player = GameObject.Find("Player");
-        minDistance = 1;
+        minDistance = 2;
     }
 
     // Update is called once per frame
