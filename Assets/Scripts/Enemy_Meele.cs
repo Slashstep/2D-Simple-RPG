@@ -9,6 +9,7 @@ public class Enemy_Meele : Enemy
     {
         player = GameObject.Find("Player");
         minDistance = 2;
+        SetUpHealthSlider();
     }
 
     // Update is called once per frame
@@ -16,5 +17,6 @@ public class Enemy_Meele : Enemy
     {
         Movement();
         CheckHealth();
+        SetHealthBar();
     }
 }

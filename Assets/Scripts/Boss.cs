@@ -12,7 +12,7 @@ public class Boss : Enemy
     {
         player = GameObject.Find("Player");
         minDistance = 2;
-        
+        SetUpHealthSlider();
     }
 
     // Update is called once per frame
@@ -20,6 +20,7 @@ public class Boss : Enemy
     {
         Movement();
         CheckHealth();
+        SetHealthBar();
     }
 
     public override void Movement()

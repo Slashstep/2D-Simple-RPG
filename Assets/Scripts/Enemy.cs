@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Enemy : MonoBehaviour
     public GameObject player;
     public Vector2 playerPos;
     public GameObject weapon;
+    public Slider healthSlider;
 
     public float minDistance;
     public float attackSpeed;
@@ -31,6 +33,16 @@ public class Enemy : MonoBehaviour
         
     }
 
+    public void SetUpHealthSlider()
+    {
+        healthSlider.maxValue = enemyHealth;
+        healthSlider.value = enemyHealth;
+    }
+
+    public void SetHealthBar()
+    {
+        healthSlider.value = enemyHealth;
+    }
     public virtual void Movement()
     {
         playerPos = player.transform.position;
