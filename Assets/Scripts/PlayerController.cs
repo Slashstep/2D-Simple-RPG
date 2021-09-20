@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed;
     public GameObject meleeAttackPrefab;
     public GameObject rangedAttackPrefab;
+    public Slider healthSlider;
 
     private Rigidbody2D playerRb;
     private float horizontalMovement;
     private float verticalMovement;
     public bool hasAttacked;
     public float attackSpeed;
+    public int initialHealth;
 
     private int m_playerHealth;
     public int playerHealth
@@ -20,17 +24,20 @@ public class PlayerController : MonoBehaviour
         get { return m_playerHealth; }
         set
         {
-            if (value <= 10)
+            if (value <= initialHealth)
                 m_playerHealth = value;
             else
-                m_playerHealth = 15;
+                m_playerHealth = initialHealth;
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        playerHealth = initialHealth;
         playerRb = GetComponent<Rigidbody2D>();
+        healthSlider.maxValue = playerHealth;
+        healthSlider.value = playerHealth;
     }
 
     // Update is called once per frame
@@ -38,6 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         CheckHealth();
+        SetHealthBar();
 
         if (Input.GetMouseButtonDown(0))
             MeleeAttack();
@@ -61,6 +69,11 @@ public class PlayerController : MonoBehaviour
             //GameManager.isGameOver = true
             //Time.timeScale = 0;
         }
+    }
+
+    void SetHealthBar()
+    {
+        healthSlider.value = playerHealth;
     }
 
     public void DamageManagement(int damage)
