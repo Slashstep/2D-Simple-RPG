@@ -166,6 +166,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296fb543a4757a5409ef555dbedc4657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyUnits:
+  - {fileID: 3686879913987693114, guid: 86bf37db050b6e24090b7a0b4b6a7fb6, type: 3}
+  - {fileID: 3959837530249814, guid: 4a1de76ebb549914283a695b25426ee2, type: 3}
+  - {fileID: 1852401536777618629, guid: 27ce8a279e2456841a56ea3639ffd4b9, type: 3}
+  activeUnits: []
+  hasWaveStarted: 0
+  waveCounter: {fileID: 934232334}
 --- !u!1 &264052538
 GameObject:
   m_ObjectHideFlags: 0
@@ -7694,11 +7701,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3359656665780700095, guid: 88c9d13204f38ce4e94877ad13318623, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 9.63
       objectReference: {fileID: 0}
     - target: {fileID: 3359656665780700095, guid: 88c9d13204f38ce4e94877ad13318623, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -6.14
       objectReference: {fileID: 0}
     - target: {fileID: 3359656665780700095, guid: 88c9d13204f38ce4e94877ad13318623, type: 3}
       propertyPath: m_LocalPosition.z
