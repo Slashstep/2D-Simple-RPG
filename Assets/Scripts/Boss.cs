@@ -11,8 +11,10 @@ public class Boss : Enemy
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         minDistance = 2;
         SetUpHealthSlider();
+        EnterActiveUnits();
     }
 
     // Update is called once per frame
@@ -27,15 +29,18 @@ public class Boss : Enemy
     {
         playerPos = player.transform.position;
 
-        if (Vector2.Distance(transform.position, playerPos) >= maxDistance)
-            transform.position = Vector2.MoveTowards(transform.position, playerPos, enemySpeed * Time.deltaTime);
-        else if(Vector2.Distance(transform.position, playerPos) < maxDistance && Vector2.Distance(transform.position, playerPos) >= minDistance)
+        if(!gameManager.hasWaveStarted)
         {
-            transform.position = Vector2.MoveTowards(transform.position, playerPos, enemySpeed * Time.deltaTime);
-            SecondaryAttack();
+            if (Vector2.Distance(transform.position, playerPos) >= maxDistance)
+                transform.position = Vector2.MoveTowards(transform.position, playerPos, enemySpeed * Time.deltaTime);
+            else if(Vector2.Distance(transform.position, playerPos) < maxDistance && Vector2.Distance(transform.position, playerPos) >= minDistance)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, playerPos, enemySpeed * Time.deltaTime);
+                SecondaryAttack();
+            }
+            else if (Vector2.Distance(transform.position, playerPos) < minDistance)
+                Attack();
         }
-        else if (Vector2.Distance(transform.position, playerPos) < minDistance)
-            Attack();
     }
 
     public void SecondaryAttack()

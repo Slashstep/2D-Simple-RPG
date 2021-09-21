@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-<<<<<<< Updated upstream
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -15,11 +14,6 @@ public class MainMenuUI : MonoBehaviour
     public Button optionsButton;
     public Button exitGameButton;
 
-=======
-
-public class MainMenuUI : MonoBehaviour
-{
->>>>>>> Stashed changes
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +25,6 @@ public class MainMenuUI : MonoBehaviour
     {
         
     }
-<<<<<<< Updated upstream
 
     public void StartGame()
     {
@@ -51,6 +44,4 @@ public class MainMenuUI : MonoBehaviour
         Application.Quit();
 #endif
     }
-=======
->>>>>>> Stashed changes
 }

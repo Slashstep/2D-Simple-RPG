@@ -8,8 +8,10 @@ public class Enemy_Meele : Enemy
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         minDistance = 2;
         SetUpHealthSlider();
+        EnterActiveUnits();
     }
 
     // Update is called once per frame

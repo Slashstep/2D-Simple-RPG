@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public Slider healthSlider;
 
     private Rigidbody2D playerRb;
+    private GameManager gameManager;
     private float horizontalMovement;
     private float verticalMovement;
     public bool hasAttacked;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         playerHealth = initialHealth;
         playerRb = GetComponent<Rigidbody2D>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         healthSlider.maxValue = playerHealth;
         healthSlider.value = playerHealth;
     }
@@ -47,10 +49,13 @@ public class PlayerController : MonoBehaviour
         CheckHealth();
         SetHealthBar();
 
-        if (Input.GetMouseButtonDown(0))
-            MeleeAttack();
-        else if (Input.GetMouseButtonDown(1))
-            RangedAttack();
+        if(!gameManager.hasWaveStarted)
+        {
+            if (Input.GetMouseButtonDown(0))
+                MeleeAttack();
+            else if (Input.GetMouseButtonDown(1))
+                RangedAttack();
+        }
     }
 
     void Move()

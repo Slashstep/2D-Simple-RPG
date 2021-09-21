@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1852401536777618625}
   - component: {fileID: 1852401536777618624}
   - component: {fileID: 1852401536777618631}
-  - component: {fileID: 1852401536777618630}
   - component: {fileID: 1852401536777618626}
+  - component: {fileID: -2108642165473700391}
   m_Layer: 0
   m_Name: EnemyBoss
   m_TagString: Enemy
@@ -107,32 +107,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &1852401536777618630
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852401536777618629}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &1852401536777618626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +128,24 @@ MonoBehaviour:
   minDistance: 2
   attackSpeed: 1
   hasAttacked: 0
+  gameManager: {fileID: 0}
   secondaryWeapon: {fileID: 7874060874837167212, guid: 9f8600549809bbb43a3a480c72ea78e5, type: 3}
+--- !u!58 &-2108642165473700391
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852401536777618629}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1001 &1852401537282178718
 PrefabInstance:
   m_ObjectHideFlags: 0

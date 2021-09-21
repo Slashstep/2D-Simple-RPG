@@ -8,8 +8,10 @@ public class Enemy_Ranged : Enemy
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         minDistance = 8;
         SetUpHealthSlider();
+        EnterActiveUnits();
     }
 
     // Update is called once per frame

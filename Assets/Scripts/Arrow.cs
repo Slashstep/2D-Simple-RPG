@@ -19,11 +19,13 @@ public class Arrow : Weapons
         {
             Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
             enemyScript.DamageManagement(damage);
+            Destroy(gameObject);
         }
         else if(collision.gameObject.CompareTag("Player"))
         {
             PlayerController playerScript = collision.gameObject.GetComponent<PlayerController>();
             playerScript.DamageManagement(damage);
+            Destroy(gameObject);
         } 
     }
 }

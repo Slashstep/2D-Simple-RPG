@@ -19,18 +19,24 @@ public class Enemy : MonoBehaviour
 
     public bool hasAttacked;
 
+    public GameManager gameManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
         
-
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void EnterActiveUnits()
+    {
+        gameManager.activeUnits.Add(gameObject);
     }
 
     public void SetUpHealthSlider()
@@ -47,15 +53,18 @@ public class Enemy : MonoBehaviour
     {
         playerPos = player.transform.position;
 
-        if (Vector2.Distance(transform.position, playerPos) >= minDistance)
-            transform.position = Vector2.MoveTowards(transform.position, playerPos, enemySpeed * Time.deltaTime);
-        else
-            Attack();
+        if(!gameManager.hasWaveStarted)
+        {
+            if (Vector2.Distance(transform.position, playerPos) >= minDistance)
+                transform.position = Vector2.MoveTowards(transform.position, playerPos, enemySpeed * Time.deltaTime);
+            else
+                Attack();
+        }
     }
 
     public virtual void Attack()
     {
-        if(hasAttacked == false)
+        if(!hasAttacked && !gameManager.hasWaveStarted)
         {
             Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y);
             var weap = Instantiate(weapon, spawnPosition, weapon.transform.rotation);
@@ -83,6 +92,7 @@ public class Enemy : MonoBehaviour
         if (enemyHealth < 1)
         {
             Destroy(gameObject);
+            gameManager.activeUnits.Remove(gameObject);
         }
     }
 }
