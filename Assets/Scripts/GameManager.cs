@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject[] enemyUnits;
     public List<GameObject> activeUnits = new List<GameObject>();
+    public TextMeshProUGUI endgameText;
+    public Button restartButton;
+    public TextMeshProUGUI playerNameText;
 
     public bool hasWaveStarted;
     public TextMeshProUGUI waveCounter;
@@ -15,10 +20,12 @@ public class GameManager : MonoBehaviour
     private int randomY = 6;
     private int waveAmount = 5;
     private int currentWave = 1;
+    private bool isGameOver;
 
     void Start()
     {
         WaveSpawnManager();
+        playerNameText.text = DataManager.Instance.playerName;
     }
 
     void Update()
@@ -59,7 +66,7 @@ public class GameManager : MonoBehaviour
     private void FinalWaveSpawnManager()
     {
         waveCounter.text = "FINAL WAVE";
-        int amountOfEnemys = 2 * currentWave + 2;
+        int amountOfEnemys = currentWave + 2;
 
         for (int i = 0; i < amountOfEnemys; i++)
         {
@@ -71,15 +78,52 @@ public class GameManager : MonoBehaviour
         StartCoroutine(WaveCountdown());
     }
 
+    private void GameFinished()
+    {
+        endgameText.text = "You Win!";
+        endgameText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+        currentWave = 1;
+        isGameOver = true;
+    }
+
+    public void GameOver()
+    {
+        endgameText.text = "Game Over";
+        endgameText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+        currentWave = 1;
+        isGameOver = true;
+
+        foreach (GameObject enemy in activeUnits)
+        {
+            activeUnits.Remove(enemy);
+            Destroy(enemy);
+        }
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void RestartGame()
+    {
+        
+        SceneManager.LoadScene(1);
+    }
+
     private void CheckWaveDone()
     {
-        if(activeUnits.Count <1)
+        if(activeUnits.Count <1 && !isGameOver)
         {
             currentWave++;
-            if (currentWave < 5)
+            if (currentWave < waveAmount)
                 WaveSpawnManager();
-            else
+            else if (currentWave == 5)
                 FinalWaveSpawnManager();
+            else if (currentWave == 6)
+                GameFinished();
         }
     }
 

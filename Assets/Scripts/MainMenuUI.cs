@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -11,20 +9,8 @@ using UnityEditor;
 public class MainMenuUI : MonoBehaviour
 {
     public Button startGameButton;
-    public Button optionsButton;
     public Button exitGameButton;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public InputField playerNameInput;
 
     public void StartGame()
     {
@@ -43,5 +29,10 @@ public class MainMenuUI : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void SetPlayerName()
+    {
+        DataManager.Instance.playerName = playerNameInput.text;
     }
 }

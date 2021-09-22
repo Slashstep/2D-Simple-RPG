@@ -125,7 +125,7 @@ MonoBehaviour:
   healthSlider: {fileID: 8260582693485772142}
   hasAttacked: 0
   attackSpeed: 0.5
-  initialHealth: 15
+  initialHealth: 18
 --- !u!58 &-26821105742620844
 CircleCollider2D:
   m_ObjectHideFlags: 0

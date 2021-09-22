@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Meele : Enemy
@@ -9,7 +7,7 @@ public class Enemy_Meele : Enemy
     {
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        minDistance = 2;
+        minDistance = 1.5f;
         SetUpHealthSlider();
         EnterActiveUnits();
     }

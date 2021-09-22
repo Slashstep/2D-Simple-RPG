@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -11,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public GameObject rangedAttackPrefab;
     public Slider healthSlider;
 
-    private Rigidbody2D playerRb;
     private GameManager gameManager;
     private float horizontalMovement;
     private float verticalMovement;
@@ -36,7 +33,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerHealth = initialHealth;
-        playerRb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         healthSlider.maxValue = playerHealth;
         healthSlider.value = playerHealth;
@@ -71,8 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerHealth < 1)
         {
-            //GameManager.isGameOver = true
-            //Time.timeScale = 0;
+            gameManager.GameOver();
         }
     }
 
