@@ -21,7 +21,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"/Users/nils/Documents/GitHub/2D-Simple-RPG/WebGL Builds;;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"/Users/nils/Unity/2D-Simple-RPG/Build_1.0;/Users/nils/Documents/GitHub/2D-Simple-RPG/WebGL Builds;;;;;;;;\"}"
             }
         ]
     }
